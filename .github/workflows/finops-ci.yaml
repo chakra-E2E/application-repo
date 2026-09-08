@@ -12,12 +12,12 @@ on:
         type: string
         required: true
         default: '406682759639'
-      decription: 
+      description: 
         type: string
         required: false
 jobs:
   feature-pipeline:
-    if: $github.ref != 'refs/heads/main'
+    if: ${{ github.ref != 'refs/heads/main' }}
     uses: chakra-E2E/Devops-workflows/.github/workflows/nodejs.yaml@main
     permissions:
       contents: read
@@ -30,7 +30,7 @@ jobs:
     secrets: inherit
 
   dev-pipeline:
-    if: $github.ref == 'refs/heads/main'
+    if: ${{ github.ref == 'refs/heads/main' }}
     uses: chakra-E2E/Devops-workflows/.github/workflows/dev-workflow.yaml@main
     permissions:
       contents: read
