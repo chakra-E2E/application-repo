@@ -15,6 +15,7 @@ on:
       description: 
         type: string
         required: false
+        default: "Triggering CI workflow"
 jobs:
   feature-pipeline:
     if: ${{ github.ref != 'refs/heads/main' }}
@@ -34,7 +35,7 @@ jobs:
     uses: chakra-E2E/Devops-workflows/.github/workflows/dev-workflow.yaml@main
     permissions:
       contents: read
-      statuses: read
+      statuses: write
     with:
         project: ${{ inputs.project }}
         component: ${{ inputs.component }}
