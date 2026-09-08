@@ -11,7 +11,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   prod:
-    if: ${{ github.ref == 'refs/heads/main' }}
+    if: github.ref == 'refs/heads/main'
     uses: chakra-E2E/Devops-workflows/.github/workflows/prod-workflow.yaml@main
     permissions:  #controls what gittoken can do
       contents: read

@@ -14,7 +14,7 @@ on:
       default: uat
 jobs:
   deploy2non-prod:
-    if: ${{ github.ref == 'refs/heads/main }}'
+    if: github.ref == 'refs/heads/main
     uses: chakra-E2E/Devops-workflows/.github/workflows/non-prod-workflow.yaml@main
     permissions:
       contents: read
