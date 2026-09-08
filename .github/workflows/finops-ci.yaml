@@ -11,6 +11,7 @@ on:
       subscription:
         type: string
         required: true
+        default: '406682759639'
       decription: 
         type: string
         required: false
