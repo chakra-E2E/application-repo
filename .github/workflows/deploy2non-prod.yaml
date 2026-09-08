@@ -1,0 +1,25 @@
+name: deploy to non-pod
+on:
+  workflow_dispatch:
+    version:
+      type: string
+      required: true
+      defualt: "Enter commit id"
+    environment:
+      type: choice
+      options:
+        - uat
+        - dev
+        - sit
+      default: uat
+jobs:
+  deploy2non-prod:
+    if: $github.ref == 'refs/heads/main'
+    uses: chakra-E2E/Devops-workflows/.github/workflows/non-prod-workflow.yaml@main
+    permissions:
+      contents: read
+      statuses: write
+    with:
+      version: ${{ inputs.version }}
+      environment: ${{ inputs.environment }}
+    secrets: inherit

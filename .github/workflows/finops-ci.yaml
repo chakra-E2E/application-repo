@@ -1,0 +1,45 @@
+name: CI workflow of trading
+on:
+  workflow_dispatch:
+    inputs:
+      project:
+        type: string
+        required: true
+      component:
+        type: string
+        required: true
+      subscription:
+        type: string
+        required: true
+      decription: 
+        type: string
+        required: false
+jobs:
+  feature-pipeline:
+    if: $github.ref != 'refs/heads/main'
+    uses: chakra-E2E/Devops-workflows/.github/workflows/nodejs.yaml@main
+    permissions:
+      contents: read
+      statuses: write
+    with: 
+        project: ${{ inputs.project }}
+        component: ${{ inputs.component }}
+        subscription: ${{ inputs.subscription }}
+        description: ${{ inputs.description }}
+    secrets: inherit
+
+  dev-pipeline:
+    if: $github.ref == 'refs/heads/main'
+    uses: chakra-E2E/Devops-workflows/.github/workflows/dev-workflow.yaml@main
+    permissions:
+      contents: read
+      statuses: read
+    with:
+        project: ${{ inputs.project }}
+        component: ${{ inputs.component }}
+        subscription: ${{ inputs.subscription }}
+        description: ${{ inputs.description }}
+    secrets: inherit
+
+
+    
